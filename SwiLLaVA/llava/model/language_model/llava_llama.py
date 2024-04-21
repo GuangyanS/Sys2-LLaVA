@@ -24,7 +24,7 @@ from transformers import AutoConfig, AutoModelForCausalLM, \
 
 from transformers.modeling_outputs import CausalLMOutputWithPast
 
-from LLaVA.llava.model.llava_arch import LlavaMetaModel, LlavaMetaForCausalLM
+from SwiLLaVA.llava.model.llava_arch import LlavaMetaModel, LlavaMetaForCausalLM
 
 
 class LlavaConfig(LlamaConfig):

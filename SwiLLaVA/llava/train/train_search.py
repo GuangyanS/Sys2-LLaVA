@@ -28,15 +28,15 @@ import torch
 
 import transformers
 
-from LLaVA.llava.constants import IGNORE_INDEX, IMAGE_TOKEN_INDEX, DEFAULT_IMAGE_TOKEN, DEFAULT_IM_START_TOKEN, DEFAULT_IM_END_TOKEN, DEFAULT_OBJECT_TOKEN,OBJECT_TOKEN_INDEX
+from SwiLLaVA.llava.constants import IGNORE_INDEX, IMAGE_TOKEN_INDEX, DEFAULT_IMAGE_TOKEN, DEFAULT_IM_START_TOKEN, DEFAULT_IM_END_TOKEN, DEFAULT_OBJECT_TOKEN,OBJECT_TOKEN_INDEX
 from torch.utils.data import Dataset
-from LLaVA.llava.train.llava_trainer import LLaVATrainer
+from SwiLLaVA.llava.train.llava_trainer import LLaVATrainer
 
-from LLaVA.llava import conversation as conversation_lib
-from LLaVA.llava.model import *
-from LLaVA.llava.mm_utils import tokenizer_image_token, tokenizer_image_object_token
+from SwiLLaVA.llava import conversation as conversation_lib
+from SwiLLaVA.llava.model import *
+from SwiLLaVA.llava.mm_utils import tokenizer_image_token, tokenizer_image_object_token
 
-from LLaVA.llava.utils import get_patch
+from SwiLLaVA.llava.utils import get_patch
 
 from PIL import Image
 
@@ -109,6 +109,7 @@ class TrainingArguments(transformers.TrainingArguments):
 	lora_dropout: float = 0.05
 	lora_weight_path: str = ""
 	lora_bias: str = "none"
+	mm_projector_lr: Optional[float] = None
 	group_by_modality_length: bool = field(default=False)
 
 
@@ -672,7 +673,8 @@ class LazySupervisedDataset(Dataset):
 		llava_focus_40k = json.load(open(os.path.join(data_path, 'llava_focus_data.json'), "r"))
 		spatial = json.load(open(os.path.join(data_path, 'spatial_relation_data.json'), "r"))
 		spatial = spatial + copy.deepcopy(spatial)
-		list_data_dict =  vaw_search_data + llava_data + GQA_search_data + llava_focus_40k + spatial + negative_data 
+		contextual_cue_data = json.load(open(os.path.join(data_path, 'possible_locations_conv_86k.json'), "r"))
+		list_data_dict =  contextual_cue_data + vaw_search_data + llava_data + GQA_search_data + llava_focus_40k + spatial + negative_data 
 
 		rank0_print("Formatting inputs...Skip in lazy mode")
 		self.tokenizer = tokenizer
@@ -1039,6 +1041,7 @@ def train():
 			model.get_model().mm_projector.to(dtype=compute_dtype, device=training_args.device)
 
 		model.config.mm_use_im_start_end = data_args.mm_use_im_start_end = model_args.mm_use_im_start_end
+		model.config.mm_projector_lr = training_args.mm_projector_lr
 		training_args.use_im_start_end = model_args.mm_use_im_start_end
 		model.config.mm_use_im_patch_token = model_args.mm_use_im_patch_token
 		model.initialize_vision_tokenizer(model_args, tokenizer=tokenizer)

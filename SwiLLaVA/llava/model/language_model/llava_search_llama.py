@@ -24,7 +24,7 @@ from transformers import AutoConfig, AutoModelForCausalLM, \
 
 from transformers.modeling_outputs import CausalLMOutputWithPast
 
-from LLaVA.llava.model.llava_search_arch import LlavaSearchMetaModel, LlavaSearchMetaForCausalLM
+from SwiLLaVA.llava.model.llava_search_arch import LlavaSearchMetaModel, LlavaSearchMetaForCausalLM
 
 
 class LlavaSearchConfig(LlamaConfig):

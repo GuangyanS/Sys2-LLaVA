@@ -1,17 +1,14 @@
 #!/bin/bash
-
-MODEL_VERSION=vicuna-v1-3-7b
-
-PROMPT_VERSION=plain
-########### DO NOT CHANGE ###########
+export PYTHONPATH=$PYTHONPATH:/home/gs3260/gysun/projs/Sys2-LLaVA
+MODEL_VERSION=vicuna-v1-5-7b
 
 # pre-train the linear projection
 deepspeed llava/train/train_mem.py \
     --deepspeed ./scripts/zero2.json \
-    --model_name_or_path lmsys/vicuna-7b-v1.3 \
-    --version $PROMPT_VERSION \
-    --data_path /path/to/blip_laion_cc_sbu_558k.json \
-    --image_folder /path/to/images \
+    --model_name_or_path lmsys/vicuna-7b-v1.5 \
+    --version mlp2x_gelu \
+    --data_path /home/gs3260/gysun/datasets/LLaVA-Pretrain/blip_laion_cc_sbu_558k.json \
+    --image_folder /home/gs3260/gysun/datasets/LLaVA-Pretrain/images \
     --vision_tower openai/clip-vit-large-patch14 \
     --mm_projector_type linear \
     --tune_mm_mlp_adapter True \
@@ -27,6 +24,7 @@ deepspeed llava/train/train_mem.py \
     --evaluation_strategy "no" \
     --save_strategy "steps" \
     --save_steps 24000 \
+    --max_steps 16 \
     --save_total_limit 1 \
     --learning_rate 2e-3 \
     --weight_decay 0. \
@@ -38,16 +36,17 @@ deepspeed llava/train/train_mem.py \
     --gradient_checkpointing True \
     --dataloader_num_workers 4 \
     --lazy_preprocess True \
-    --report_to wandb
+    --report_to wandb \
+    --run_name 'swi-7b-pretrain-linear'
 
 # pre-train the re-sampler
 
 deepspeed llava/train/train_mem.py \
     --deepspeed ./scripts/zero2.json \
-    --model_name_or_path lmsys/vicuna-7b-v1.3 \
-    --version $PROMPT_VERSION \
-    --data_path /path/to/blip_laion_cc_sbu_558k.json \
-    --image_folder /path/to/images \
+    --model_name_or_path lmsys/vicuna-7b-v1.5 \
+    --version plain \
+    --data_path /home/gs3260/gysun/datasets/LLaVA-Pretrain/blip_laion_cc_sbu_558k.json \
+    --image_folder /home/gs3260/gysun/datasets/LLaVA-Pretrain/images \
     --vision_tower openai/clip-vit-large-patch14 \
     --mm_projector_type perceiver \
     --tune_mm_mlp_adapter True \
@@ -63,6 +62,7 @@ deepspeed llava/train/train_mem.py \
     --evaluation_strategy "no" \
     --save_strategy "steps" \
     --save_steps 24000 \
+    --max_steps 16 \
     --save_total_limit 1 \
     --learning_rate 2e-4 \
     --weight_decay 0. \
@@ -74,4 +74,5 @@ deepspeed llava/train/train_mem.py \
     --gradient_checkpointing True \
     --dataloader_num_workers 4 \
     --lazy_preprocess True \
-    --report_to wandb
+    --report_to wandb \
+    --run_name 'swi-7b-pretrain-resampler'

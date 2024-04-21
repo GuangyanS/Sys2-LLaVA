@@ -1,10 +1,10 @@
 from abc import ABC, abstractmethod
 import torch
 
-from LLaVA.llava.model.multimodal_encoder.builder import build_vision_tower
-from LLaVA.llava.model.multimodal_projector.builder import build_vision_projector
+from SwiLLaVA.llava.model.multimodal_encoder.builder import build_vision_tower
+from SwiLLaVA.llava.model.multimodal_projector.builder import build_vision_projector
 
-from LLaVA.llava.constants import IGNORE_INDEX, IMAGE_TOKEN_INDEX, DEFAULT_IMAGE_PATCH_TOKEN, DEFAULT_IM_START_TOKEN, DEFAULT_IM_END_TOKEN, OBJECT_TOKEN_INDEX
+from SwiLLaVA.llava.constants import IGNORE_INDEX, IMAGE_TOKEN_INDEX, DEFAULT_IMAGE_PATCH_TOKEN, DEFAULT_IM_START_TOKEN, DEFAULT_IM_END_TOKEN, OBJECT_TOKEN_INDEX
 
 
 class LlavaSearchMetaModel:

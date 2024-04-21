@@ -17,9 +17,9 @@ import os
 import shutil
 
 import torch
-from llava.constants import (DEFAULT_IM_END_TOKEN, DEFAULT_IM_START_TOKEN,
+from SegLLaVA.model.llava.constants import (DEFAULT_IM_END_TOKEN, DEFAULT_IM_START_TOKEN,
                              DEFAULT_IMAGE_PATCH_TOKEN)
-from llava.model import *
+from SegLLaVA.model.llava.model import *
 from transformers import (AutoConfig, AutoModelForCausalLM, AutoTokenizer,
                           BitsAndBytesConfig)
 
