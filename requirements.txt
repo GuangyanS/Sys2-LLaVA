@@ -9,7 +9,6 @@ async-timeout==4.0.3
 attrs==23.2.0
 bitsandbytes==0.41.0
 certifi==2024.2.2
--e git+https://github.com/GuangyanS/Chain-of-Spot@6bb190b2b826d342ff9217992aedb0eefa060d2b#egg=Chain_of_Spot
 charset-normalizer==3.3.2
 click==8.1.7
 contourpy==1.2.1
