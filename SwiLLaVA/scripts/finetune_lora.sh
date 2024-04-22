@@ -8,12 +8,12 @@ MODEL_VERSION="vicuna-v1-5-7b"
 deepspeed llava/train/train_mem_search.py \
     --lora_enable True --lora_r 128 --lora_alpha 256 --mm_projector_lr 2e-5 \
     --deepspeed ./scripts/zero3.json \
-    --model_name_or_path liuhaotian/llava-v1.5-7b \
+    --model_name_or_path lmsys/vicuna-7b-v1.5 \
     --version $PROMPT_VERSION \
     --data_path /home/gs3260/gysun/datasets/seal_vqa_data \
     --image_folder /home/gs3260/gysun/datasets \
     --vision_tower openai/clip-vit-large-patch14 \
-    --mm_projector_type linear \
+    --mm_projector_type mlp2x_gelu \
     --object_mm_projector_type perceiver \
     --pretrain_mm_mlp_adapter ./checkpoints/llava-$MODEL_VERSION-linear-pretrain/mm_projector.bin \
     --pretrain_mm_perceiver_adapter ./checkpoints/llava-$MODEL_VERSION-resampler-pretrain/mm_projector.bin \
