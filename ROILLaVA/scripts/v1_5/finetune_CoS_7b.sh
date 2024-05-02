@@ -34,4 +34,4 @@ deepspeed llava/train/train_mem_CoS.py \
     --dataloader_num_workers 4 \
     --lazy_preprocess True \
     --report_to wandb \
-    --run_name cos-7b'
+    --run_name 'cos-7b'
