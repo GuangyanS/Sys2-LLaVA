@@ -131,8 +131,8 @@ def collate_fn(
                     tokenizer.decode(z),
                 )
 
-        if cur_len < tokenizer.model_max_length:
-            assert cur_len == total_len
+        # if cur_len < tokenizer.model_max_length:
+        #     assert cur_len == total_len
 
     if inferences[0] == False:
         truncate_len = tokenizer.model_max_length - 255

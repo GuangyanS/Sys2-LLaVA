@@ -24,13 +24,13 @@ from typing import Dict, List, Optional, Sequence
 
 import torch
 import transformers
-from llava import conversation as conversation_lib
-from llava.constants import (DEFAULT_IM_END_TOKEN, DEFAULT_IM_START_TOKEN,
+from SegLLaVA.llava import conversation as conversation_lib
+from SegLLaVA.llava.constants import (DEFAULT_IM_END_TOKEN, DEFAULT_IM_START_TOKEN,
                              DEFAULT_IMAGE_TOKEN, IGNORE_INDEX,
                              IMAGE_TOKEN_INDEX)
-from llava.mm_utils import tokenizer_image_token
-from llava.model import *
-from llava.train.llava_trainer import LLaVATrainer
+from SegLLaVA.llava.mm_utils import tokenizer_image_token
+from SegLLaVA.llava.model import *
+from SegLLaVA.llava.train.llava_trainer import LLaVATrainer
 from PIL import Image
 from torch.utils.data import Dataset
 

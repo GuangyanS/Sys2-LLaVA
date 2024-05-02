@@ -3,7 +3,7 @@ import argparse
 import json
 import sys
 sys.path.append("/share/project/dyh/lzy/LLaVA-crop")
-from llava.eval.m4c_evaluator import EvalAIAnswerProcessor
+from ROILLaVA.llava.eval.m4c_evaluator import EvalAIAnswerProcessor
 
 
 def parse_args():

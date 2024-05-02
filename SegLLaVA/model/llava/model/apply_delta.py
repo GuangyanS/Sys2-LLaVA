@@ -5,7 +5,7 @@ python3 -m fastchat.model.apply_delta --base ~/model_weights/llama-7b --target ~
 import argparse
 
 import torch
-from llava import LlavaLlamaForCausalLM
+from SegLLaVA.llava import LlavaLlamaForCausalLM
 from tqdm import tqdm
 from transformers import AutoModelForCausalLM, AutoTokenizer
 

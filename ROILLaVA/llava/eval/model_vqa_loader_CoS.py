@@ -6,11 +6,11 @@ from tqdm import tqdm
 # import shortuuid
 import uuid
 
-from llava.constants import IMAGE_TOKEN_INDEX, DEFAULT_IMAGE_TOKEN, DEFAULT_IM_START_TOKEN, DEFAULT_IM_END_TOKEN
-from llava.conversation import conv_templates, SeparatorStyle
-from llava.model.builder import load_pretrained_model
-from llava.utils import disable_torch_init
-from llava.mm_utils import tokenizer_image_token, process_images, get_model_name_from_path, expand2square
+from ROILLaVA.llava.constants import IMAGE_TOKEN_INDEX, DEFAULT_IMAGE_TOKEN, DEFAULT_IM_START_TOKEN, DEFAULT_IM_END_TOKEN
+from ROILLaVA.llava.conversation import conv_templates, SeparatorStyle
+from ROILLaVA.llava.model.builder import load_pretrained_model
+from ROILLaVA.llava.utils import disable_torch_init
+from ROILLaVA.llava.mm_utils import tokenizer_image_token, process_images, get_model_name_from_path, expand2square
 from torch.utils.data import Dataset, DataLoader
 
 from PIL import Image
@@ -91,6 +91,7 @@ def eval_model(args):
     model_name = get_model_name_from_path(model_path)
     # import pdb; pdb.set_trace()
     tokenizer, model, image_processor, context_len = load_pretrained_model(model_path, args.model_base, model_name)
+    print(model)
 
     questions = [json.loads(q) for q in open(os.path.expanduser(args.question_file), "r")]
     questions = get_chunk(questions, args.num_chunks, args.chunk_idx)
