@@ -26,13 +26,13 @@ import torch
 
 import transformers
 
-from LLaVA.llava.constants import IGNORE_INDEX, IMAGE_TOKEN_INDEX, DEFAULT_IMAGE_TOKEN, DEFAULT_IM_START_TOKEN, DEFAULT_IM_END_TOKEN, DEFAULT_OBJECT_TOKEN,OBJECT_TOKEN_INDEX
+from SwiLLaVA.llava.llava.constants import IGNORE_INDEX, IMAGE_TOKEN_INDEX, DEFAULT_IMAGE_TOKEN, DEFAULT_IM_START_TOKEN, DEFAULT_IM_END_TOKEN, DEFAULT_OBJECT_TOKEN,OBJECT_TOKEN_INDEX
 from torch.utils.data import Dataset
-from LLaVA.llava.train.llava_trainer import LLaVATrainer
+from SwiLLaVA.llava.llava.train.llava_trainer import LLaVATrainer
 
 import LLaVA.llava.conversation as conversation_lib
-from LLaVA.llava.model import *
-from LLaVA.llava.mm_utils import tokenizer_image_token, tokenizer_image_object_token
+from SwiLLaVA.llava.llava.model import *
+from SwiLLaVA.llava.llava.mm_utils import tokenizer_image_token, tokenizer_image_object_token
 
 from PIL import Image
 
