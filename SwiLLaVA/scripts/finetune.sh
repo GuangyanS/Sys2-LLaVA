@@ -4,7 +4,7 @@ deepspeed llava/train/train_mem_search.py \
     --version v1 \
     --data_path /home/dxleec/gysun/datasets/seal_vqa_data \
     --image_folder /home/dxleec/gysun/datasets \
-    --vision_tower openai/clip-vit-large-patch14 \
+    --vision_tower openai/clip-vit-large-patch14-336 \
     --mm_projector_type mlp2x_gelu \
     --object_mm_projector_type perceiver \
     --pretrain_mm_perceiver_adapter /home/dxleec/gysun/init_weights/LISA-Results/llava-vicuna-v1-5-7b-resampler-pretrain/mm_projector.bin \
