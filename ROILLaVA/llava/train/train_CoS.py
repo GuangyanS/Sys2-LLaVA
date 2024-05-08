@@ -37,6 +37,8 @@ from ROILLaVA.llava.mm_utils import tokenizer_image_token
 from torchvision import transforms
 from torchvision.transforms import InterpolationMode
 from PIL import Image
+from PIL import ImageFile
+ImageFile.LOAD_TRUNCATED_IMAGES = True
 import numpy as np
 local_rank = None
 

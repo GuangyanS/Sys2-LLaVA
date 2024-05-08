@@ -1,9 +1,10 @@
 #!/bin/bash
 
-CKPT="/PAH/TO/CKPT"
+
+CKPT="cos-v1.5-7b"
 
 python -m llava.eval.model_vqa_loader_CoS \
-    --model-path ./checkpoints/$CKPT \
+    --model-path /home/dxleec/gysun/init_weights/LISA-Results/cos-llava-v1.5-7b \
     --question-file ./playground/data/eval/pope/llava_pope_test.jsonl \
     --image-folder ./playground/data/eval/pope/val2014 \
     --answers-file ./playground/data/eval/pope/answers/$CKPT.jsonl \
