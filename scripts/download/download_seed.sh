@@ -1,4 +1,4 @@
-cd /ibex/ai/home/wangc0g/gysun/eval/seed_bench
+cd /ibex/ai/home/wangc0g/gysun/datasets/eval/seed_bench
 
 git clone https://huggingface.co/datasets/AILab-CVC/SEED-Bench
 

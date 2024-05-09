@@ -1,4 +1,4 @@
-cd /ibex/ai/home/wangc0g/gysun/eval/pope
+cd /ibex/ai/home/wangc0g/gysun/datasets/eval/pope
 
 git clone https://github.com/AoiDragon/POPE.git
 mv POPE/output/coco/coco_pope_adversarial.json .
