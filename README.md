@@ -8,6 +8,14 @@ https://github.com/haotian-liu/LLaVA/blob/main/docs/Evaluation.md
 sh download_eval.sh
 ```
 
+## Environment Setup
+Create a new environment and install the required dependencies:
+```
+python -m venv sys2
+source sys2/bin/activate
+pip install -r requirements.txt
+```
+
 ## Switch Adapter
 The alignment stage of the VQA LLM uses the 558K subset of the LAION-CC-SBU dataset used by LLaVA which can be downloaded here.
 
