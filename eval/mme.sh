@@ -2,8 +2,10 @@
 
 CKPT="llava-v1.5-13b-crop-v3-pro"
 
-python -m llava.eval.model_vqa_loader \
-    --model-path checkpoints/$CKPT \
+python -m ROI.llava.eval.model_vqa_loader \
+    --swi-model-path checkpoints/switch-llava-7b \
+    --region-model-path checkpoints/region-llava-7b \
+    --seg-model-path checkpoints/seg-llava-7b \
     --question-file ./playground/data/eval/MME/llava_mme.jsonl \
     --image-folder ./playground/data/eval/MME/MME_Benchmark_release_version \
     --answers-file ./playground/data/eval/MME/answers/$CKPT.jsonl \

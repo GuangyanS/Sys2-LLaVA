@@ -9,8 +9,10 @@ CKPT="llava-v1.5-13b"
 SPLIT="llava_vqav2_mscoco_test-dev2015"
 
 for IDX in $(seq 0 $((CHUNKS-1))); do
-    CUDA_VISIBLE_DEVICES=${GPULIST[$IDX]} python -m llava.eval.model_vqa_loader \
-        --model-path liuhaotian/llava-v1.5-13b \
+    CUDA_VISIBLE_DEVICES=${GPULIST[$IDX]} python -m ROI.llava.eval.model_vqa_loader \
+        --swi-model-path checkpoints/switch-llava-7b \
+        --region-model-path checkpoints/region-llava-7b \
+        --seg-model-path checkpoints/seg-llava-7b \ 
         --question-file ./playground/data/eval/vqav2/$SPLIT.jsonl \
         --image-folder ./playground/data/eval/vqav2/test2015 \
         --answers-file ./playground/data/eval/vqav2/answers/$SPLIT/$CKPT/${CHUNKS}_${IDX}.jsonl \

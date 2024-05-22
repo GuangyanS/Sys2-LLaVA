@@ -8,8 +8,10 @@ CHUNKS=${#GPULIST[@]}
 CKPT="llava-v1.5-7b-ckpt"
 
 for IDX in $(seq 0 $((CHUNKS-1))); do
-    CUDA_VISIBLE_DEVICES=${GPULIST[$IDX]} python -m llava.eval.model_vqa_loader \
-        --model-path ./checkpoints/$CKPT \
+    CUDA_VISIBLE_DEVICES=${GPULIST[$IDX]} python -m ROI.llava.eval.model_vqa_loader \
+        --swi-model-path checkpoints/switch-llava-7b \
+        --region-model-path checkpoints/region-llava-7b \
+        --seg-model-path checkpoints/seg-llava-7b \ 
         --question-file ./playground/data/eval/seed_bench/llava-seed-bench.jsonl \
         --image-folder ./playground/data/eval/seed_bench \
         --answers-file ./playground/data/eval/seed_bench/answers/$CKPT/${CHUNKS}_${IDX}.jsonl \

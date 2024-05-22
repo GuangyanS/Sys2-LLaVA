@@ -1,23 +1,19 @@
-# Sys2-LLaVA
+# Visual Agents as Fast and Slow Thinkers
 
-hello
-## Download Eval Dataset
-
-https://github.com/haotian-liu/LLaVA/blob/main/docs/Evaluation.md
-
-```
-sh download_eval.sh
-```
-
-## Environment Setup
+## Requirements
 Create a new environment and install the required dependencies:
 ```
-python -m venv sys2
-source sys2/bin/activate
+conda create -n sys2 python=3.10 -y
+conda activate sys2
 pip install -r requirements.txt
+pip install flash-attn --no-build-isolation
+export PYTHONPATH=$PYTHONPATH:path/to/repo
 ```
 
-## Switch Adapter
+## Training
+
+### Switch Adapter
+
 The alignment stage of the VQA LLM uses the 558K subset of the LAION-CC-SBU dataset used by LLaVA which can be downloaded here.
 
 The instruction tuning stage requires several instruction tuning subsets which can be found here.
@@ -33,9 +29,17 @@ The instruction tuning data requires images from COCO-2014, COCO-2017, and GQA. 
      └── images
 ```
 
-## ROI Adapter
+For the pre-training stage, enter the SwiLLaVA script folder and run
+```
+sh pretrain.sh
+```
 
-Initial Weights: We use LLaVA-1.5-7B and LLaVA-1.5-13B for finetuning. You may download these models and put them in the ./checkpoint folder.
+For the instruction tuning stage, enter the SwiLLaVA script folder and run
+```
+sh finetune_lora.sh
+```
+
+### ROI Adapter
 
 Download Data: The dataset structure is the same as used in LLaVA, and we provide json files to modify the original LLaVA training dataset into our dataset. To correctly download the data, please check the instructions.
 
@@ -55,17 +59,14 @@ After downloading all of them, organize the data as follows in ./playground/data
     └── VG_100K_2
 ```
 
-Training Data Preparations: We migrate the brilliant work of LRP++ to detect the correct ROI corresponding to a single question or instruction. You can directly download our generated dataset to reproduce our results from Google Drive. You may also follow the Notebook to prepare your own data.
-
-Evaluations on Various Benchmarks: We follow the Evaluation Docs in LLaVA to conduct our experiments. If you find it laborious and complex, please check LMMs-Eval for faster evaluation.
-
 Start Training: The finetuning process takes around 20 hours on 8*A100 (80G) for LLaVA-1.5-13B. We finetune LLaVA-1.5 using Deepspeed Zero-3, you can directly run the scripts to launch training:
 
 ```
-bash ./scripts/v1_5/finetune_CoS_13b.sh
+bash ./scripts/v1_5/finetune_lora.sh
 ```
 
 ## Seg Adapter
+
 ### Training Data Preparation
 The training data consists of 4 types of data:
 
@@ -117,3 +118,19 @@ The training data consists of 4 types of data:
 │           ├── train.json
 │           └── VOCdevkit
 ```
+To train the SegLLaVA, use the command:
+```
+deepspeed --master_port=24999 train_ds.py \
+  --version="PATH_TO_LLaVA-v1.5" \
+  --dataset_dir='./dataset' \
+  --vision_pretrained="PATH_TO_SAM" \
+  --dataset="sem_seg||refer_seg" \
+  --sample_rates="3,1" \
+  --exp_name="seg-llava-7b"
+```
+
+## Evaluation
+
+We use the same setting of LLaVA v1.5. We evaluate models on a diverse set of 8 benchmarks. To ensure the reproducibility, we evaluate the models with greedy decoding. We do not evaluate using beam search to make the inference process consistent with the chat demo of real-time outputs.
+
+See [Evaluation.md](https://github.com/haotian-liu/LLaVA/blob/main/docs/Evaluation.md) for more details. The scripts are under folder `eval`.
