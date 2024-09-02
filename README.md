@@ -136,7 +136,7 @@ We use the same setting of LLaVA v1.5. We evaluate models on a diverse set of 8 
 See [Evaluation.md](https://github.com/haotian-liu/LLaVA/blob/main/docs/Evaluation.md) for more details. The scripts are under folder `eval`.
 
 ```
-@misc{sun2024visualagentsfastslow,
+@article{sun2024visualagentsfastslow,
       title={Visual Agents as Fast and Slow Thinkers}, 
       author={Guangyan Sun and Mingyu Jin and Zhenting Wang and Cheng-Long Wang and Siqi Ma and Qifan Wang and Ying Nian Wu and Yongfeng Zhang and Dongfang Liu},
       year={2024},
