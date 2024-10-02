@@ -134,15 +134,3 @@ deepspeed --master_port=24999 train_ds.py \
 We use the same setting of LLaVA v1.5. We evaluate models on a diverse set of 8 benchmarks. To ensure the reproducibility, we evaluate the models with greedy decoding. We do not evaluate using beam search to make the inference process consistent with the chat demo of real-time outputs.
 
 See [Evaluation.md](https://github.com/haotian-liu/LLaVA/blob/main/docs/Evaluation.md) for more details. The scripts are under folder `eval`.
-
-```
-@article{sun2024visualagentsfastslow,
-      title={Visual Agents as Fast and Slow Thinkers}, 
-      author={Guangyan Sun and Mingyu Jin and Zhenting Wang and Cheng-Long Wang and Siqi Ma and Qifan Wang and Ying Nian Wu and Yongfeng Zhang and Dongfang Liu},
-      year={2024},
-      eprint={2408.08862},
-      archivePrefix={arXiv},
-      primaryClass={cs.LG},
-      url={https://arxiv.org/abs/2408.08862}, 
-}
-```
