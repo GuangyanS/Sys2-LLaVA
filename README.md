@@ -1,4 +1,4 @@
-# Visual Agents as Fast and Slow Thinkers
+# Visual Agents as Fast and Slow Thinkers [ICLR 2025]
 
 ## Requirements
 Create a new environment and install the required dependencies:
